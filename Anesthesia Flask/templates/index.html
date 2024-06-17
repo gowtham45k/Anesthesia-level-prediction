@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>Anesthesia Level Predictor</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="icon" href="static/syringe.png">
+<style>
+  *{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+body {
+    overflow: hidden; /* Prevent scrollbars caused by the video */
+    text-align: center;
+}
+
+#video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* Ensure the video is behind other elements */
+}
+
+
+
+.title{
+    top:10px;
+    margin-left:-30x;
+    margin:auto;
+    /* margin-right:50% ; */
+    text-align: center;
+    color: green;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size:25px;
+    text-shadow: 1px 1px 2px black;
+    white-space: nowrap;
+}
+.login{
+    margin-top: 100px;
+    width: 350px; /* Adjust the width as needed */
+    margin: auto;
+}
+.Textfield{
+    margin-top: 50px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    margin-bottom: 10px;
+    width:85%;
+    margin-left: 50px;
+}
+#Textfield{
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    width:85%;
+    margin-left: 50px;
+}
+.btn{
+    padding: 15px;
+    border-radius: 10px;
+    width: 30%;
+    background-color: green;
+    border: none;
+    outline:none;
+    margin-top: 25px;
+    margin-left: 140px;
+    color:black;
+    transition:transform .2s;
+    cursor: pointer;
+}
+.btn:hover{
+    transform: scale(1.2);
+    background-color: lightsalmon ;
+    color:black;
+
+}
+
+
+</style>
+</head>
+
+<body>
+  <video autoplay muted loop id="video-background">
+    <source src="static/bg.mp4" type="video/mp4">
+  </video>
+ <div class="login">
+  <div class="title">
+	<h1>Anesthesia Dosage Prediction</h1>
+</div>
+     
+    <form action="{{ url_for('predict')}}"method="post">
+			
+        
+		<input type="text" name="male" placeholder="male" required="required" class="Textfield" />
+                <input type="text" name="Weight" placeholder="Weight" required="required" id="Textfield" />
+		<input type="text" name="Age" placeholder="Age" required="required" id="Textfield"  />
+
+		<input type="text" name="SBP" placeholder="SBP" required="required"  id="Textfield"/>
+		<input type="text" name="DBP" placeholder="DBP" required="required" id="Textfield"/>
+		<input type="text" name="HeartRate" placeholder="HeartRate" required="required" id="Textfield" />
+		
+		<input type="text" name="MAP" placeholder="MAP" required="required" id="Textfield"/>
+		<input type="text" name="Oxygen_saturation" placeholder="Oxygen_saturation" required="required" id="Textfield" />
+		<input type="text" name="Timestamp" placeholder="Timestamp" required="required"  id="Textfield" />
+
+                
+		
+
+		
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+
+   <br>
+   {{ prediction_text }}
+
+ </div>
+
+
+</body>
+</html>
